@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "rootDir": "src",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "*": ["./typings/*"]
+    },
+    "lib": ["DOM", "ES2015"]
+  },
+  "include": ["example", "src"],
+  "exclude": ["node_modules", "dist"]
+}
