@@ -31,6 +31,16 @@ export const toutiao: ToutiaoAppConfig = {
 }
 
 export const web: WebAppConfig = {
-  pages,
-  title: 'Remax One Web',
+  // 页面默认标题
+  title: '页面默认标题',
+  // 配置的页面
+  pages: ['pages/index/index'],
+  // 是否全局开启下拉刷新
+  pullToRefresh: false,
+  // 触底滚动的默认距离，单位 px
+  reachBottomOffset: 50,
+  router: {
+    // history 类型，支持 hash 和 browser
+    type: 'browser',
+  },
 }
