@@ -23,6 +23,7 @@ const Chart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Elem
       return
     }
     chart.setOption(option, { notMerge: true })
+    onUpdated?.()
   }, [])
 
   const initChart = (canvas: any, width: number, height: number, dpr: number) => {
@@ -34,6 +35,7 @@ const Chart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Elem
     })
 
     canvas.setChart(chart)
+    onCreated?.()
     // @ts-ignore
     ref.current = chart
     updateOption(option)

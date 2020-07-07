@@ -24,6 +24,7 @@ const Chart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Elem
     chart.setOption(option, {
       notMerge: true,
     })
+    onUpdated?.()
   }, [])
 
   const initChart = () => {
@@ -32,10 +33,10 @@ const Chart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Elem
     }
     const chart = echarts.init(containerRef.current)
 
+    onCreated?.()
     // @ts-ignore
     ref.current = chart
     updateOption(option)
-
     return chart
   }
 
