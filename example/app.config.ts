@@ -1,10 +1,10 @@
-import { AppConfig as WechatAppConfig } from 'remax/wechat';
-import { AppConfig as AliAppConfig } from 'remax/ali';
-import { AppConfig as ToutiaoAppConfig } from 'remax/toutiao';
-import { AppConfig as WebAppConfig } from 'remax/web';
+import { AppConfig as WechatAppConfig } from 'remax/wechat'
+import { AppConfig as AliAppConfig } from 'remax/ali'
+import { AppConfig as ToutiaoAppConfig } from 'remax/toutiao'
+import { AppConfig as WebAppConfig } from 'remax/web'
 
-const pages = ['pages/index/index'];
-const color = '#282c34';
+const pages = ['pages/index/index']
+const color = '#282c34'
 
 export const wechat: WechatAppConfig = {
   pages,
@@ -12,7 +12,7 @@ export const wechat: WechatAppConfig = {
     navigationBarBackgroundColor: color,
     navigationBarTitleText: 'Remax One Wechat',
   },
-};
+}
 
 export const ali: AliAppConfig = {
   pages,
@@ -20,7 +20,7 @@ export const ali: AliAppConfig = {
     defaultTitle: 'Remax One Ali',
     titleBarColor: color,
   },
-};
+}
 
 export const toutiao: ToutiaoAppConfig = {
   pages,
@@ -28,9 +28,9 @@ export const toutiao: ToutiaoAppConfig = {
     navigationBarTitleText: 'Remax One Toutiao',
     navigationBarBackgroundColor: color,
   },
-};
+}
 
 export const web: WebAppConfig = {
   pages,
   title: 'Remax One Web',
-};
+}

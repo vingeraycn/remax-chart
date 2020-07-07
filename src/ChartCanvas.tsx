@@ -1,4 +1,4 @@
-import * as echarts from 'echarts';
+import * as echarts from 'echarts'
 
 export default class ChartCanvas {
   private ctx: any
@@ -12,26 +12,26 @@ export default class ChartCanvas {
   private event: Record<string, any> = {}
 
   constructor(ctx: any, canvasId: string, isNew: boolean, canvasNode: any) {
-    this.ctx = ctx;
-    this.canvasId = canvasId;
-    this.chart = null;
+    this.ctx = ctx
+    this.canvasId = canvasId
+    this.chart = null
     if (isNew) {
-      this.canvasNode = canvasNode;
+      this.canvasNode = canvasNode
     } else {
-      this.initStyle(ctx);
+      this.initStyle(ctx)
     }
 
-    this.initEvent();
+    this.initEvent()
   }
 
   getContext(contextType: string) {
     if (contextType === '2d') {
-      return this.ctx;
+      return this.ctx
     }
   }
 
   setChart(chart: echarts.ECharts) {
-    this.chart = chart;
+    this.chart = chart
   }
 
   attachEvent() {
@@ -44,17 +44,17 @@ export default class ChartCanvas {
 
   initCanvas(zrender: any, ctx: any) {
     zrender.util.getContext = function () {
-      return ctx;
-    };
+      return ctx
+    }
 
     zrender.util.$override('measureText', function (text: string, font: string) {
-      ctx.font = font || '12px sans-serif';
-      return ctx.measureText(text);
-    });
+      ctx.font = font || '12px sans-serif'
+      return ctx.measureText(text)
+    })
   }
 
   initStyle(ctx: any) {
-    var styles = [
+    const styles = [
       'fillStyle',
       'strokeStyle',
       'globalAlpha',
@@ -67,26 +67,26 @@ export default class ChartCanvas {
       'lineDash',
       'miterLimit',
       'fontSize',
-    ];
+    ]
 
-    styles.forEach(style => {
+    styles.forEach((style) => {
       Object.defineProperty(ctx, style, {
-        set: value => {
+        set: (value) => {
           if (
             (style !== 'fillStyle' && style !== 'strokeStyle') ||
             (value !== 'none' && value !== null)
           ) {
-            ctx[`set${style.charAt(0).toUpperCase()}${style.slice(1)}`](value);
+            ctx[`set${style.charAt(0).toUpperCase()}${style.slice(1)}`](value)
           }
         },
-      });
-    });
+      })
+    })
 
-    ctx.createRadialGradient = ctx.createCircularGradient;
+    ctx.createRadialGradient = ctx.createCircularGradient
   }
 
   initEvent() {
-    this.event = {};
+    this.event = {}
     const eventNames = [
       {
         wxName: 'touchStart',
@@ -104,34 +104,34 @@ export default class ChartCanvas {
         wxName: 'touchEnd',
         ecName: 'click',
       },
-    ];
+    ]
 
-    eventNames.forEach(name => {
+    eventNames.forEach((name) => {
       this.event[name.wxName] = (e: any) => {
-        const touch = e.touches[0];
+        const touch = e.touches[0]
         this.chart?.getZr?.().handler.dispatch(name.ecName, {
           zrX: name.wxName === 'tap' ? touch.clientX : touch.x,
           zrY: name.wxName === 'tap' ? touch.clientY : touch.y,
-        });
-      };
-    });
+        })
+      }
+    })
   }
 
   set width(w) {
-    if (this.canvasNode) this.canvasNode.width = w;
+    if (this.canvasNode) this.canvasNode.width = w
   }
 
   get width() {
-    if (this.canvasNode) return this.canvasNode.width;
-    return 0;
+    if (this.canvasNode) return this.canvasNode.width
+    return 0
   }
 
   set height(h) {
-    if (this.canvasNode) this.canvasNode.height = h;
+    if (this.canvasNode) this.canvasNode.height = h
   }
 
   get height() {
-    if (this.canvasNode) return this.canvasNode.height;
-    return 0;
+    if (this.canvasNode) return this.canvasNode.height
+    return 0
   }
 }

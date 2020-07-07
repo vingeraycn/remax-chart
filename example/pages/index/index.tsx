@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { View, Text, Image } from 'remax/one';
-import Chart from '@/index';
-import { EChartOption } from 'echarts';
+import * as React from 'react'
+import { View, Text, Image } from 'remax/one'
+import Chart from '@/index'
+import { EChartOption } from 'echarts'
 
 export default (): JSX.Element => {
   const option = {
@@ -18,10 +18,10 @@ export default (): JSX.Element => {
         type: 'line',
       },
     ],
-  } as EChartOption;
+  } as EChartOption
   return (
     <View>
       <Chart option={option} />
     </View>
-  );
-};
+  )
+}
