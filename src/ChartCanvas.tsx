@@ -1,13 +1,15 @@
+import * as echarts from 'echarts';
+
 export default class ChartCanvas {
-  private ctx: any;
+  private ctx: any
 
-  private canvasId: string;
+  private canvasId: string
 
-  private chart: null;
+  private chart: echarts.ECharts | null
 
-  private canvasNode: any;
+  private canvasNode: any
 
-  private event: Record<string, any> = {};
+  private event: Record<string, any> = {}
 
   constructor(ctx: any, canvasId: string, isNew: boolean, canvasNode: any) {
     this.ctx = ctx;
@@ -16,12 +18,10 @@ export default class ChartCanvas {
     if (isNew) {
       this.canvasNode = canvasNode;
     } else {
-      this._initStyle(ctx);
+      this.initStyle(ctx);
     }
 
-    // this._initCanvas(zrender, ctx);
-
-    this._initEvent();
+    this.initEvent();
   }
 
   getContext(contextType: string) {
@@ -30,7 +30,7 @@ export default class ChartCanvas {
     }
   }
 
-  setChart(chart: any) {
+  setChart(chart: echarts.ECharts) {
     this.chart = chart;
   }
 
@@ -42,7 +42,7 @@ export default class ChartCanvas {
     // noop
   }
 
-  _initCanvas(zrender: any, ctx: any) {
+  initCanvas(zrender: any, ctx: any) {
     zrender.util.getContext = function () {
       return ctx;
     };
@@ -53,7 +53,7 @@ export default class ChartCanvas {
     });
   }
 
-  _initStyle(ctx: any) {
+  initStyle(ctx: any) {
     var styles = [
       'fillStyle',
       'strokeStyle',
@@ -76,18 +76,16 @@ export default class ChartCanvas {
             (style !== 'fillStyle' && style !== 'strokeStyle') ||
             (value !== 'none' && value !== null)
           ) {
-            ctx[`set${ style.charAt(0).toUpperCase() }${style.slice(1)}`](value);
+            ctx[`set${style.charAt(0).toUpperCase()}${style.slice(1)}`](value);
           }
         },
       });
     });
 
-    ctx.createRadialGradient = () => {
-      return ctx.createCircularGradient(arguments);
-    };
+    ctx.createRadialGradient = ctx.createCircularGradient;
   }
 
-  _initEvent() {
+  initEvent() {
     this.event = {};
     const eventNames = [
       {
@@ -111,8 +109,7 @@ export default class ChartCanvas {
     eventNames.forEach(name => {
       this.event[name.wxName] = (e: any) => {
         const touch = e.touches[0];
-        // @ts-ignore
-        this.chart!.getZr().handler.dispatch(name.ecName, {
+        this.chart?.getZr?.().handler.dispatch(name.ecName, {
           zrX: name.wxName === 'tap' ? touch.clientX : touch.x,
           zrY: name.wxName === 'tap' ? touch.clientY : touch.y,
         });
@@ -124,13 +121,13 @@ export default class ChartCanvas {
     if (this.canvasNode) this.canvasNode.width = w;
   }
 
-  set height(h) {
-    if (this.canvasNode) this.canvasNode.height = h;
-  }
-
   get width() {
     if (this.canvasNode) return this.canvasNode.width;
     return 0;
+  }
+
+  set height(h) {
+    if (this.canvasNode) this.canvasNode.height = h;
   }
 
   get height() {

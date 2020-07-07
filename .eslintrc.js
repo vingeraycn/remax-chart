@@ -1,6 +1,6 @@
-const OFF = 0;
-const WARNING = 1;
-const ERROR = 2;
+const OFF = 0
+const WARNING = 1
+const ERROR = 2
 
 module.exports = {
   env: {
@@ -12,11 +12,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  extends: [
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-    'prettier/react',
-  ],
+  extends: ['plugin:@typescript-eslint/recommended', 'prettier', 'prettier/react'],
   plugins: ['@typescript-eslint', 'react', 'react-hooks'],
   rules: {
     quotes: [ERROR, 'single'], // 引号类型
@@ -30,12 +26,11 @@ module.exports = {
     'no-multi-spaces': ERROR,
     'no-var': OFF,
     'one-var': OFF,
-    'class-methods-use-this': WARNING,
+    'class-methods-use-this': OFF,
     'no-unused-expressions': OFF, // 允许使用断路 和三目运算
     'arrow-parens': [ERROR, 'as-needed'],
     'no-mixed-operators': OFF,
     'react/prop-types': OFF,
-    'import/order': WARNING,
     '@typescript-eslint/no-explicit-any': OFF, // 允许使用 any
     '@typescript-eslint/explicit-member-accessibility': OFF,
     'react/destructuring-assignment': OFF,
@@ -51,5 +46,6 @@ module.exports = {
     'import/named': OFF,
     'react/no-array-index-key': OFF,
     '@typescript-eslint/ban-ts-comment': OFF,
+    '@typescript-eslint/explicit-module-boundary-types': OFF,
   },
-};
+}
