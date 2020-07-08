@@ -11,7 +11,7 @@ export default class ChartCanvas {
 
   private event: Record<string, any> = {}
 
-  constructor(ctx: any, canvasId: string, isNew: boolean, canvasNode: any) {
+  constructor(ctx: any, canvasId: string, isNew: boolean, canvasNode?: any) {
     this.ctx = ctx
     this.canvasId = canvasId
     this.chart = null

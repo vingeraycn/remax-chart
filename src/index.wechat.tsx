@@ -6,7 +6,7 @@ import * as echarts from 'echarts'
 import { EChartOption } from 'echarts'
 import ChartCanvas from './ChartCanvas'
 
-export interface ChartProps {
+interface ChartProps {
   option: EChartOption
   onUpdated?: () => void
   onCreated?: () => void
