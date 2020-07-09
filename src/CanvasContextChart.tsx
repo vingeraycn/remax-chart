@@ -10,6 +10,7 @@ import { getMiniAppApiObj } from '@/utils'
 
 interface ChartProps {
   option: EChartOption
+  componentClass?: React.ReactNode
   width?: string
   height?: string
   onUpdated?: () => void
@@ -24,6 +25,7 @@ const CanvasContextChart = ({
   onDispose,
   width = '100vw',
   height = '30vh',
+  componentClass: Comp = AliCanvas,
   ...props
 }: ChartProps): JSX.Element => {
   const [size, setSize] = useState({
@@ -101,7 +103,8 @@ const CanvasContextChart = ({
     updateOption(option)
   }, [option, updateOption])
 
-  return <AliCanvas id={id} width={size.width} height={size.height} style={size} {...props} />
+  // @ts-ignore
+  return <Comp id={id} width={size.width} height={size.height} style={size} {...props} />
 }
 
 export default CanvasContextChart
