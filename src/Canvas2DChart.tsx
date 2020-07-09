@@ -12,9 +12,16 @@ interface ChartProps {
   option: EChartOption
   onUpdated?: () => void
   onCreated?: () => void
+  onDispose?: () => void
 }
 
-const Canvas2DChart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Element => {
+const Canvas2DChart = ({
+  option,
+  onCreated,
+  onUpdated,
+  onDispose,
+  ...props
+}: ChartProps): JSX.Element => {
   const ref = useRef<echarts.ECharts>(null)
   const id = useMemo(() => `chart_${Math.random().toFixed(3).replace('.', '_')}`, [])
 
@@ -65,6 +72,15 @@ const Canvas2DChart = ({ option, onCreated, onUpdated, ...props }: ChartProps): 
 
   useNativeEffect(() => {
     init()
+    return () => {
+      const chart = ref.current
+      if (!chart) {
+        return
+      }
+      chart.dispose()
+      ref.current = null
+      onDispose?.()
+    }
   }, [])
 
   useEffect(() => {
