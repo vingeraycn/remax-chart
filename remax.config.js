@@ -7,4 +7,5 @@ module.exports = {
   configWebpack({ config, webpack, addCSSRule }) {
     config.resolve.alias.set('@', path.resolve(__dirname, 'src'))
   },
+  pxToRpx: false
 };

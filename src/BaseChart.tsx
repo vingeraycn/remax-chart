@@ -14,8 +14,8 @@ export enum BaseChartType {
 
 interface BaseChartProps {
   option: EChartOption
-  container: ElementType<any>
-  type: BaseChartType
+  type?: BaseChartType
+  container?: ElementType<any>
   theme?: string
   width?: string
   height?: string
@@ -31,8 +31,8 @@ const BaseChart = ({
   onCreated,
   onUpdated,
   onDispose,
-  width = '100vw',
-  height = '30vh',
+  width = '300px',
+  height = '200px',
   container: Container = 'div',
   ...props
 }: BaseChartProps): JSX.Element => {
@@ -55,29 +55,30 @@ const BaseChart = ({
     onUpdated?.()
   }, [])
 
-  const initChart = useCallback(function (
-    canvas: any,
-    theme?: string,
-    opt?: {
-      width?: number
-      height?: number
-      devicePixelRatio?: number
-    }
-  ) {
-    if (!canvas) {
-      return null
-    }
+  const initChart = useCallback(
+    function (
+      canvas: any,
+      theme?: string,
+      opt?: {
+        width?: number
+        height?: number
+        devicePixelRatio?: number
+      }
+    ) {
+      if (!canvas) {
+        return null
+      }
+      const chart = echarts.init(canvas, theme, opt)
 
-    echarts.setCanvasCreator(() => canvas)
-    const chart = echarts.init(canvas, theme, opt)
+      canvas.setChart?.(chart)
+      onCreated?.()
+      ref.current = chart
+      updateOption(option)
 
-    canvas.setChart(chart)
-    onCreated?.()
-    ref.current = chart
-    updateOption(option)
-
-    return chart
-  }, [])
+      return chart
+    },
+    [type]
+  )
 
   const init = () => {
     const miniAppApi = getMiniAppApiObj()
@@ -105,13 +106,14 @@ const BaseChart = ({
         })
 
         ctx.scale(dpr, dpr)
+        echarts.setCanvasCreator(() => canvas)
         initChart(canvas, theme, {
           width,
           height,
           devicePixelRatio: dpr,
         })
       })
-    } else if (target === BaseChartType.CANVAS_2D) {
+    } else if (type === BaseChartType.CANVAS_2D) {
       target.fields({ node: true, size: true }).exec(([{ node, width, height }]: any) => {
         const ctx = node.getContext('2d')
         const canvas = new ChartCanvas(ctx, `#${id}`, true, node)
@@ -119,6 +121,7 @@ const BaseChart = ({
         node.width = width * dpr
         node.height = height * dpr
         ctx.scale(dpr, dpr)
+        echarts.setCanvasCreator(() => canvas)
         initChart(canvas, theme, {
           width,
           height,
