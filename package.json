@@ -5,7 +5,10 @@
   "description": "echarts for remax",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "keywords": [],
+  "keywords": [
+    "remax",
+    "echarts"
+  ],
   "author": "leihancn <leihanchenzhou@outlook.com>",
   "license": "MIT",
   "repository": {
@@ -13,6 +16,9 @@
     "url": "git+https://github.com/LeiHanCN/remax-chart.git"
   },
   "homepage": "https://github.com/LeiHanCN/remax-chart/blob/master/README.md",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "remax build -w -t",
     "lint": "eslint ./{src,example}/* --ext '.ts,.tsx,.js,.jsx' --fix",
