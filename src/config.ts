@@ -1,4 +1,10 @@
 export const MOCK_OPTION = {
+  tooltip: {
+    show: true,
+    confine: true,
+    renderMode: 'richText',
+    triggerOn: 'mousemove',
+  },
   xAxis: {
     type: 'category',
     data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],

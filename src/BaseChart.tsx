@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ElementType, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useNativeEffect } from 'remax'
 // @ts-ignore
-import * as echarts from './echarts.min'
+import * as echarts from './echarts'
 import { EChartOption } from 'echarts'
 import ChartCanvas from './ChartCanvas'
 import { getMiniAppApiObj } from '@/utils'
@@ -24,6 +24,15 @@ interface BaseChartProps {
   onDispose?: () => void
 }
 
+function wrapTouch(event: any) {
+  for (let i = 0; i < event.touches.length; ++i) {
+    const touch = event.touches[i]
+    touch.offsetX = touch.x
+    touch.offsetY = touch.y
+  }
+  return event
+}
+
 const BaseChart = ({
   option,
   type,
@@ -31,8 +40,8 @@ const BaseChart = ({
   onCreated,
   onUpdated,
   onDispose,
-  width = '300px',
-  height = '200px',
+  width = '100%',
+  height = '100%',
   container: Container = 'div',
   ...props
 }: BaseChartProps): JSX.Element => {
@@ -131,6 +140,53 @@ const BaseChart = ({
     }
   }
 
+  const handleTouchStart = (e: any) => {
+    const chart = ref.current
+    if (chart && e.touches.length > 0) {
+      const touch = e.touches[0]
+      const handler = chart.getZr().handler
+      handler.dispatch('mousedown', {
+        zrX: touch.x,
+        zrY: touch.y,
+      })
+      handler.dispatch('mousemove', {
+        zrX: touch.x,
+        zrY: touch.y,
+      })
+      handler.processGesture(wrapTouch(e), 'start')
+    }
+  }
+
+  const handleTouchMove = (e: any) => {
+    const chart = ref.current
+    if (chart && e.touches.length > 0) {
+      const touch = e.touches[0]
+      const handler = chart.getZr().handler
+      handler.dispatch('mousemove', {
+        zrX: touch.x,
+        zrY: touch.y,
+      })
+      handler.processGesture(wrapTouch(e), 'change')
+    }
+  }
+
+  const handleTouchEnd = (e: any) => {
+    const chart = ref.current
+    if (chart) {
+      const touch = e.changedTouches ? e.changedTouches[0] : {}
+      const handler = chart.getZr().handler
+      handler.dispatch('mouseup', {
+        zrX: touch.x,
+        zrY: touch.y,
+      })
+      handler.dispatch('click', {
+        zrX: touch.x,
+        zrY: touch.y,
+      })
+      handler.processGesture(wrapTouch(e), 'end')
+    }
+  }
+
   useNativeEffect(() => {
     init()
     return () => {
@@ -155,7 +211,10 @@ const BaseChart = ({
       id={id}
       width={size.width}
       height={size.height}
-      style={size}
+      style={{ minHeight: '100px', ...size }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       {...canvasProps}
       {...props}
     />
