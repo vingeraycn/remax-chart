@@ -9,6 +9,33 @@ echarts for remax
 | 支付宝小程序     |    √    |
 | 头条小程序       |    x    |
 
+## 快速上手
+```tsx
+const option = {
+  xAxis: {
+    type: 'category',
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+  },
+  yAxis: {
+    type: 'value',
+  },
+  series: [
+    {
+      data: [820, 932, 901, 934, 1290, 1330, 1320],
+      type: 'line',
+    },
+  ],
+}
+
+import RemaxChart from 'remax-chart'
+
+const LineChart = () => {
+  return <RemaxChart option={option} height="30vh" />
+}
+
+export default LineChart
+```
+
 ## API
 > * 标记为必填属性
 
