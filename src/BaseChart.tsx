@@ -20,7 +20,7 @@ export interface BaseChartProps {
   width?: string
   height?: string
   onUpdated?: () => void
-  onCreated?: () => void
+  onCreated?: (chart: echarts.ECharts) => void
   onDispose?: () => void
 }
 
@@ -80,7 +80,7 @@ const BaseChart = ({
       const chart = echarts.init(canvas, theme, opt)
 
       canvas.setChart?.(chart)
-      onCreated?.()
+      onCreated?.(chart)
       ref.current = chart
       updateOption(option)
 
