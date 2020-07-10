@@ -1,6 +1,5 @@
 {
   "name": "remax-chart",
-  "private": true,
   "version": "1.0.0",
   "description": "echarts for remax",
   "main": "lib/index.js",
