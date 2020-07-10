@@ -1,27 +1,14 @@
 import * as React from 'react'
-import { View, Text, Image } from 'remax/one'
-import Chart from '@/index'
-import { EChartOption } from 'echarts'
+import { View } from 'remax/one'
+import RemaxChart from '@/index'
+import { MOCK_OPTION } from '@/config'
 
-export default (): JSX.Element => {
-  const option = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-      },
-    ],
-  } as EChartOption
+const Index = (): JSX.Element => {
   return (
     <View>
-      <Chart option={option} />
+      <RemaxChart option={MOCK_OPTION as any} height="30vh" />
     </View>
   )
 }
+
+export default Index

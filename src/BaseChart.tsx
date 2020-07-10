@@ -12,7 +12,7 @@ export enum BaseChartType {
   CANVAS_2D = 'CANVAS_2D',
 }
 
-interface BaseChartProps {
+export interface BaseChartProps {
   option: EChartOption
   type?: BaseChartType
   container?: ElementType<any>
@@ -211,7 +211,7 @@ const BaseChart = ({
       id={id}
       width={size.width}
       height={size.height}
-      style={{ minHeight: '100px', ...size }}
+      style={size}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
