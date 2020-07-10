@@ -15,10 +15,10 @@
   "homepage": "https://github.com/LeiHanCN/remax-chart/blob/master/README.md",
   "scripts": {
     "dev": "remax build -w -t",
-    "build": "cross-env NODE_ENV=production remax build -t",
     "lint": "eslint ./{src,example}/* --ext '.ts,.tsx,.js,.jsx' --fix",
     "format": "prettier --write '{src,example}/**/*.{ts,tsx,js,jsx}'",
-    "cz": "yarn lint && yarn format && git add . && git cz"
+    "cz": "yarn lint && yarn format && git add . && git cz",
+    "build": "rimraf lib  && tsc -d && cp src/echarts.js lib/echarts.js"
   },
   "devDependencies": {
     "@types/echarts": "^4.6.3",
@@ -34,6 +34,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "remax": "^2.6.0",
+    "rimraf": "^3.0.2",
     "typescript": "^3.9.6"
   },
   "peerDependencies": {
