@@ -1,7 +1,7 @@
 import React from 'react'
-import BaseChart, { BaseChartType } from '@/BaseChart'
+import BaseChart, { BaseChartType } from './BaseChart'
 import { Canvas as AliCanvas } from 'remax/ali'
-import { MOCK_OPTION } from '@/config'
+import { MOCK_OPTION } from './config'
 
 const Chart = (props: any) => (
   <BaseChart

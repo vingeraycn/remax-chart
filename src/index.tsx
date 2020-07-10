@@ -1,9 +1,8 @@
-import DefaultChart from './index.web'
-import BaseChart, { BaseChartProps, BaseChartType } from '@/BaseChart'
+import BaseChart, { BaseChartProps, BaseChartType } from './BaseChart'
 import { Canvas as WeChatCanvas } from 'remax/wechat'
 import { Canvas as AliCanvas } from 'remax/ali'
 import { Canvas as TTCanvas } from 'remax/toutiao'
-import React from 'react'
+import * as React from 'react'
 
 export interface RemaxChartProps extends Omit<BaseChartProps, 'type' | 'container'> {}
 const RemaxChart = (props: RemaxChartProps) => {
@@ -21,7 +20,7 @@ const RemaxChart = (props: RemaxChartProps) => {
     return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={TTCanvas} {...props} />
   }
 
-  return <DefaultChart {...props} />
+  return <BaseChart {...props} />
 }
 
 export default RemaxChart

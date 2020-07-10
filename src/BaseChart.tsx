@@ -5,7 +5,7 @@ import { useNativeEffect } from 'remax'
 import * as echarts from './echarts'
 import { EChartOption } from 'echarts'
 import ChartCanvas from './ChartCanvas'
-import { getMiniAppApiObj } from '@/utils'
+import { getMiniAppApiObj } from './utils'
 
 export enum BaseChartType {
   CANVAS_CONTEXT = 'CANVAS_CONTEXT',

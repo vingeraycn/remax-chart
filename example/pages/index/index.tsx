@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View } from 'remax/one'
-import RemaxChart from '@/index'
-import { MOCK_OPTION } from '@/config'
+import RemaxChart from '../../../src/index'
+import { MOCK_OPTION } from '../../../src/config'
 
 const Index = (): JSX.Element => {
   return (
