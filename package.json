@@ -7,6 +7,11 @@
   "keywords": [],
   "author": "leihancn <leihanchenzhou@outlook.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LeiHanCN/remax-chart.git"
+  },
+  "homepage": "https://github.com/LeiHanCN/remax-chart/blob/master/README.md",
   "scripts": {
     "dev": "remax build -w -t",
     "build": "cross-env NODE_ENV=production remax build -t",
