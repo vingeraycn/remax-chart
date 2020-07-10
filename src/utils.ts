@@ -8,7 +8,7 @@ export const getPlatform = () => {
   }
 }
 
-export const getMiniAppApiObj = () => {
+export const getMiniAppApiObj = (): any | undefined => {
   const { isAli, isTouTiao, isWeChat } = getPlatform()
 
   switch (true) {
@@ -17,6 +17,7 @@ export const getMiniAppApiObj = () => {
     case isAli:
       return my
     case isTouTiao:
+      // @ts-ignore
       return tt
     default:
       return undefined

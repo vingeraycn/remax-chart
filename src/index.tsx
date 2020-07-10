@@ -1,7 +1,9 @@
 import { EChartOption } from 'echarts'
 import DefaultChart from './index.web'
-import Canvas2DChart from './Canvas2DChart'
-import CanvasContextChart from './CanvasContextChart'
+import BaseChart, { BaseChartType } from '@/BaseChart'
+import { Canvas as WeChatCanvas } from 'remax/wechat'
+import { Canvas as AliCanvas } from 'remax/ali'
+import { Canvas as TTCanvas } from 'remax/toutiao'
 import React from 'react'
 
 export interface RemaxChartProps {
@@ -13,11 +15,15 @@ const RemaxChart = (props: RemaxChartProps) => {
   const platform = process.env.REMAX_PLATFORM
 
   if (platform === 'wechat') {
-    return <Canvas2DChart {...props} />
+    return <BaseChart type={BaseChartType.CANVAS_2D} container={WeChatCanvas} {...props} />
   }
 
-  if (platform === 'toutiao' || platform === 'ali') {
-    return <CanvasContextChart {...props} />
+  if (platform === 'ali') {
+    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={AliCanvas} {...props} />
+  }
+
+  if (platform === 'toutiao') {
+    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={TTCanvas} {...props} />
   }
 
   return <DefaultChart {...props} />

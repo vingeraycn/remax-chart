@@ -1,7 +1,15 @@
 import React from 'react'
-import CanvasContextChart from '@/CanvasContextChart'
-import { Canvas } from 'remax/toutiao'
+import { Canvas as TTCanvas } from 'remax/toutiao'
+import BaseChart, { BaseChartType } from '@/BaseChart'
+import { MOCK_OPTION } from '@/config'
 
-const Chart = (props: any) => <CanvasContextChart componentClass={Canvas} {...props} />
+const Chart = (props: any) => (
+  <BaseChart
+    type={BaseChartType.CANVAS_CONTEXT}
+    container={TTCanvas}
+    option={MOCK_OPTION}
+    {...props}
+  />
+)
 
 export default Chart

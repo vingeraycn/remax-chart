@@ -1,55 +1,18 @@
 import * as React from 'react'
-import { useCallback, useEffect, useMemo, useRef } from 'react'
-import { useNativeEffect } from 'remax'
 // @ts-ignore
-import * as echarts from './echarts.min'
-import { EChartOption } from 'echarts'
+import BaseChart, { BaseChartType } from '@/BaseChart'
+import { Canvas as WeChatCanvas } from 'remax/wechat'
+import { MOCK_OPTION } from '@/config'
 
-interface ChartProps {
-  option: EChartOption
-  onUpdated?: () => void
-  onCreated?: () => void
-}
-
-const Chart = ({ option, onCreated, onUpdated, ...props }: ChartProps): JSX.Element => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const ref = useRef<echarts.ECharts>(null)
-  const id = useMemo(() => `chart_${Math.random().toFixed(3).replace('.', '_')}`, [])
-
-  const updateOption = useCallback((option: EChartOption) => {
-    const chart = ref.current
-
-    if (!chart || !option) {
-      return
-    }
-    chart.setOption(option, {
-      notMerge: true,
-    })
-    onUpdated?.()
-  }, [])
-
-  const initChart = () => {
-    if (!containerRef.current) {
-      return
-    }
-    const chart = echarts.init(containerRef.current)
-
-    onCreated?.()
-    // @ts-ignore
-    ref.current = chart
-    updateOption(option)
-    return chart
-  }
-
-  useNativeEffect(() => {
-    initChart()
-  }, [])
-
-  useEffect(() => {
-    updateOption(option)
-  }, [option, updateOption])
-
-  return <div ref={containerRef} id={id} style={{ width: '100vw', height: '100vh' }} {...props} />
+const Chart = (props: any): JSX.Element => {
+  return (
+    <BaseChart
+      type={BaseChartType.CANVAS_2D}
+      container={WeChatCanvas}
+      option={MOCK_OPTION}
+      {...props}
+    />
+  )
 }
 
 export default Chart
