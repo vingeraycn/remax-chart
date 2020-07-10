@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useNativeEffect } from 'remax'
-import * as echarts from 'echarts'
+// @ts-ignore
+import * as echarts from './echarts.min'
 import { EChartOption } from 'echarts'
 
 interface ChartProps {
