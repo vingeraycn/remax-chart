@@ -17,7 +17,6 @@ export const getMiniAppApiObj = (): any | undefined => {
     case isAli:
       return my
     case isTouTiao:
-      // @ts-ignore
       return tt
     default:
       return undefined

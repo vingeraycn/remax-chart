@@ -23,7 +23,7 @@
     "lint": "eslint ./{src,example}/* --ext '.ts,.tsx,.js,.jsx' --fix",
     "format": "prettier --write '{src,example}/**/*.{ts,tsx,js,jsx}'",
     "cz": "yarn lint && yarn format && git add . && git cz",
-    "build": "rimraf lib  && tsc -d && cp src/echarts.js lib/echarts.js"
+    "build": "rimraf lib  && tsc && cp src/echarts.js lib/echarts.js"
   },
   "devDependencies": {
     "@types/echarts": "^4.6.3",
