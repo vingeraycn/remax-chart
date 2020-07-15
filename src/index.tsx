@@ -7,6 +7,7 @@ import * as React from 'react'
 export interface RemaxChartProps extends Omit<BaseChartProps, 'type' | 'container'> {}
 const RemaxChart = (props: RemaxChartProps) => {
   const platform = process.env.REMAX_PLATFORM
+  console.log(platform)
 
   if (platform === 'wechat') {
     return <BaseChart type={BaseChartType.CANVAS_2D} container={WeChatCanvas} {...props} />

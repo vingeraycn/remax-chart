@@ -34,7 +34,7 @@ export const web: WebAppConfig = {
   // 页面默认标题
   title: '页面默认标题',
   // 配置的页面
-  pages: ['pages/index/index'],
+  pages,
   // 是否全局开启下拉刷新
   pullToRefresh: false,
   // 触底滚动的默认距离，单位 px
