@@ -106,7 +106,7 @@ const BaseChart = ({
     if (type === BaseChartType.CANVAS_CONTEXT) {
       target.boundingClientRect().exec((res: any) => {
         const ctx = miniAppApi.createCanvasContext(id)
-        const canvas = new ChartCanvas(ctx, `#${id}`, false)
+        const canvas = new ChartCanvas(ctx, id, false)
         const { width, height } = res[0] as my.IBoundingClientRect
 
         setSize({
@@ -125,7 +125,7 @@ const BaseChart = ({
     } else if (type === BaseChartType.CANVAS_2D) {
       target.fields({ node: true, size: true }).exec(([{ node, width, height }]: any) => {
         const ctx = node.getContext('2d')
-        const canvas = new ChartCanvas(ctx, `#${id}`, true, node)
+        const canvas = new ChartCanvas(ctx, id, true, node)
 
         node.width = width * dpr
         node.height = height * dpr
