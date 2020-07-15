@@ -107,7 +107,7 @@ const BaseChart = ({
       target.boundingClientRect().exec((res: any) => {
         const ctx = miniAppApi.createCanvasContext(id)
         const canvas = new ChartCanvas(ctx, id, false)
-        const { width, height } = res[0] as my.IBoundingClientRect
+        const { width, height } = res[0] as any
 
         setSize({
           width: `${dpr * width}px`,
