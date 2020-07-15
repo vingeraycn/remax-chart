@@ -1,24 +1,21 @@
-import BaseChart, { BaseChartProps, BaseChartType } from './BaseChart'
-import { Canvas as WeChatCanvas } from 'remax/wechat'
-import { Canvas as AliCanvas } from 'remax/ali'
-import { Canvas as TTCanvas } from 'remax/toutiao'
 import * as React from 'react'
+import BaseChart, { BaseChartProps, BaseChartType } from './BaseChart'
 
 export interface RemaxChartProps extends Omit<BaseChartProps, 'type' | 'container'> {}
 const RemaxChart = (props: RemaxChartProps) => {
-  const platform = process.env.REMAX_PLATFORM
-  console.log(platform)
-
-  if (platform === 'wechat') {
-    return <BaseChart type={BaseChartType.CANVAS_2D} container={WeChatCanvas} {...props} />
+  if (process.env.REMAX_PLATFORM === 'wechat') {
+    const { Canvas } = require('remax/wechat')
+    return <BaseChart type={BaseChartType.CANVAS_2D} container={Canvas} {...props} />
   }
 
-  if (platform === 'ali') {
-    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={AliCanvas} {...props} />
+  if (process.env.REMAX_PLATFORM === 'ali') {
+    const { Canvas } = require('remax/ali')
+    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={Canvas} {...props} />
   }
 
-  if (platform === 'toutiao') {
-    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={TTCanvas} {...props} />
+  if (process.env.REMAX_PLATFORM === 'toutiao') {
+    const { Canvas } = require('remax/toutiao')
+    return <BaseChart type={BaseChartType.CANVAS_CONTEXT} container={Canvas} {...props} />
   }
 
   return <BaseChart {...props} />
