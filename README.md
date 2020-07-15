@@ -49,6 +49,18 @@ const LineChart = () => {
 export default LineChart
 ```
 
+## 运行示例
+```bash
+git clone https://github.com/LeiHanCN/remax-chart.git
+cd remax-chart
+yarn
+# if you need run at wechat miniapp, just run `yarn dev wechat`
+# run at ali platform, run `yarn dev ali`
+# run at toutiao, run `yarn dev toutiao`
+# run at web, run `yarn dev web`
+yarn dev [platform]
+```
+
 ## API
 > * 标记为必填属性
 
@@ -62,6 +74,11 @@ export default LineChart
 | onUpdated      | () => void                         |
 | onDispose      | () => void                         |
 
+## 提示
+##### 运行在小程序端
+ECharts 官方对小程序运行环境下适配了大多数功能，还有部分功能还未适配，[查看详情](https://github.com/ecomfe/echarts-for-weixin#%E6%9A%82%E4%B8%8D%E6%94%AF%E6%8C%81%E7%9A%84%E5%8A%9F%E8%83%BD)。
 
-## 路线图
-- [ ] 增加 Tooltip 功能
+另外目前在小程序端还不支持 tooltip。
+
+##### 运行在 Web 端
+可以正常使用。
