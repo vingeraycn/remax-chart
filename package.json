@@ -23,16 +23,17 @@
     "lint": "eslint ./{src,example}/* --ext '.ts,.tsx,.js,.jsx' --fix",
     "format": "prettier --write '{src,example}/**/*.{ts,tsx,js,jsx}'",
     "cz": "yarn lint && yarn format && git add . && git cz",
-    "build": "rimraf lib  && tsc && cp src/echarts.js lib/echarts.js"
+    "build": "rimraf lib  && tsc && cp src/echarts.js lib/echarts.js",
+    "upgrade-dependencies": "npx npm-check-updates -u && yarn"
   },
   "devDependencies": {
-    "@types/echarts": "^4.6.3",
-    "@types/react": "^16.9.41",
-    "@typescript-eslint/eslint-plugin": "^3.6.0",
-    "@typescript-eslint/parser": "^3.6.0",
+    "@types/echarts": "^4.6.4",
+    "@types/react": "^16.9.43",
+    "@typescript-eslint/eslint-plugin": "^3.7.1",
+    "@typescript-eslint/parser": "^3.7.1",
     "cross-env": "^7.0.2",
-    "eslint": "^7.4.0",
-    "eslint-plugin-react": "^7.20.3",
+    "eslint": "^7.5.0",
+    "eslint-plugin-react": "^7.20.5",
     "git-cz": "^4.7.0",
     "prettier": "^2.0.5",
     "prop-types": "^15.7.2",
@@ -40,11 +41,11 @@
     "react-dom": "^16.13.1",
     "remax": "^2.6.0",
     "rimraf": "^3.0.2",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0",
-    "remax": ">=2.0.7"
+    "react": ">=16.13.1",
+    "react-dom": ">=16.13.1",
+    "remax": ">=2.7.6"
   }
 }
